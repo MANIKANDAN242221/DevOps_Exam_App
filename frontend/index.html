@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>DevOps App</title>
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/599/599502.png" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --primary: #6366f1;
@@ -39,7 +41,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -156,27 +158,24 @@
         .input-group {
             width: 100%;
             margin-bottom: 1.8rem;
-            position: relative;
         }
 
-        .input-group i {
+        .input-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon i {
             position: absolute;
             left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--text-light);
             transition: all 0.3s ease;
+            pointer-events: none;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
-            color: var(--text);
-            font-size: 0.95rem;
-        }
-
-        input, select {
+        .input-icon input,
+        .input-icon select {
             padding: 0.9rem 1rem 0.9rem 45px;
             width: 100%;
             border: 1px solid #e2e8f0;
@@ -187,16 +186,26 @@
             color: var(--text);
         }
 
-        input:focus, select:focus {
+        .input-icon input:focus,
+        .input-icon select:focus {
             outline: none;
             border-color: var(--primary-light);
             box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.3);
             background-color: white;
         }
 
-        input:focus + i, select:focus + i {
+        .input-icon input:focus ~ i,
+        .input-icon select:focus ~ i {
             color: var(--primary);
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.95rem;
         }
 
         .next-btn {
@@ -287,47 +296,15 @@
             background: linear-gradient(var(--primary), var(--primary-dark));
         }
 
-        .shape-1 {
-            width: 150px;
-            height: 150px;
-            top: -50px;
-            right: -50px;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .shape-2 {
-            width: 100px;
-            height: 100px;
-            bottom: 20%;
-            left: -30px;
-            animation: float 6s ease-in-out infinite 2s;
-        }
-
-        .shape-3 {
-            width: 60px;
-            height: 60px;
-            top: 30%;
-            left: 20%;
-            animation: float 5s ease-in-out infinite 1s;
-        }
+        .shape-1 { width: 150px; height: 150px; top: -50px; right: -50px; animation: float 8s ease-in-out infinite; }
+        .shape-2 { width: 100px; height: 100px; bottom: 20%; left: -30px; animation: float 6s ease-in-out infinite 2s; }
+        .shape-3 { width: 60px; height: 60px; top: 30%; left: 20%; animation: float 5s ease-in-out infinite 1s; }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            form {
-                padding: 2rem 1.5rem;
-            }
-            
-            .exam-features {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            h1 { font-size: 2.2rem; }
+            .header p { font-size: 1rem; }
+            form { padding: 2rem 1.5rem; }
+            .exam-features { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -340,55 +317,45 @@
 
     <div class="container">
         <div class="header">
-            <div class="exam-badge">
-                <i class="fas fa-shield-alt"></i> DevOps Mock Exam
-            </div>
+            <div class="exam-badge"><i class="fas fa-shield-alt"></i> DevOps Mock Exam</div>
             <h1>DevOps Mock Certification Exam</h1>
-            <p>Validate your expertise with of DevOps learning</p>
-            
+            <p>Validate your expertise in DevOps</p>
+
             <div class="exam-features">
-                <div class="feature">
-                    <i class="fas fa-clock"></i>
-                    <span>Timed Assessment</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Real-world Scenarios</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Performance Analytics</span>
-                </div>
+                <div class="feature"><i class="fas fa-clock"></i><span>Timed Assessment</span></div>
+                <div class="feature"><i class="fas fa-check-circle"></i><span>Real-world Scenarios</span></div>
+                <div class="feature"><i class="fas fa-chart-line"></i><span>Performance Analytics</span></div>
             </div>
         </div>
-        
+
         <form action="/start" method="POST">
             <div class="input-group">
                 <label for="name">Full Name</label>
-                <i class="fas fa-user"></i>
-                <input type="text" id="name" name="name" placeholder="Enter your Name" required>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="name" name="name" placeholder="Enter your Name" required>
+                </div>
             </div>
-
             <div class="input-group">
                 <label for="gender">Gender</label>
-                <i class="fas fa-venus-mars"></i>
-                <select id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Prefer not to say</option>
-                </select>
+                <div class="input-icon">
+                    <i class="fas fa-venus-mars"></i>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Prefer not to say</option>
+                    </select>
+                </div>
             </div>
-
             <div class="input-group">
                 <label for="email">Email Address</label>
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" name="email" placeholder="Enter your Email id" required>
+                <div class="input-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter your Email id" required>
+                </div>
             </div>
-
-            <button type="submit" class="next-btn">
-                <i class="fas fa-play"></i> Start Exam
-            </button>
+            <button type="submit" class="next-btn"><i class="fas fa-play"></i> Start Exam</button>
         </form>
 
         <div class="footer">
