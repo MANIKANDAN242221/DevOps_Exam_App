@@ -3,6 +3,20 @@
 <head>
     <title>Admin Dashboard - DevOps Exam</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            text-align: left;
+        }
+        th, td {
+            padding: 10px;
+        }
+        thead {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -10,8 +24,11 @@
         <img src="{{ url_for('static', filename='admin-banner.jpg') }}" class="banner" alt="Admin Banner">
         <p>All User Submissions</p>
 
-        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px; text-align: left;">
-            <thead style="background-color: #e0e0e0;">
+        <table border="1">
+            <caption style="caption-side: top; font-weight: bold; margin-bottom: 10px;">
+                Table of User Submissions with Scores
+            </caption>
+            <thead>
                 <tr>
                     <th>Username</th>
                     <th>Gender</th>
