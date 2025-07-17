@@ -150,3 +150,10 @@ questions = [
         "answer": "Combines multiple repositories into one URL"
     }
 ]
+
+# Example to print all questions
+for idx, q in enumerate(questions, 1):
+    print(f"Q{idx}: {q['question']}")
+    for i, option in enumerate(q["options"], 1):
+        print(f"   {i}. {option}")
+    print(f"Answer: {q['answer']}\n")
