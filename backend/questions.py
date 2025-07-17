@@ -1,3 +1,5 @@
+WEB_XML = "web.xml"
+
 questions = [
     {
         "question": "What is the primary purpose of Jenkins in a CI/CD pipeline?",
@@ -56,7 +58,7 @@ questions = [
     },
     {
         "question": "What is the main configuration file for Tomcat?",
-        "options": ["tomcat.conf", "web.xml", "server.xml", "context.xml"],
+        "options": ["tomcat.conf", WEB_XML, "server.xml", "context.xml"],
         "answer": "server.xml"
     },
     {
@@ -111,8 +113,8 @@ questions = [
     },
     {
         "question": "Which file configures Tomcat's default servlet?",
-        "options": ["context.xml", "web.xml", "tomcat-users.xml", "catalina.properties"],
-        "answer": "web.xml"
+        "options": ["context.xml", WEB_XML, "tomcat-users.xml", "catalina.properties"],
+        "answer": WEB_XML
     },
     {
         "question": "What is the purpose of SonarQube Quality Profiles?",
