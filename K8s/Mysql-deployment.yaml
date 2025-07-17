@@ -12,7 +12,7 @@ spec:
         app: mysql
     spec:
       containers:
-        - name: mysql
+        - name: mysql_db
           image: mysql:5.7
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -21,3 +21,4 @@ spec:
               value: devops_exam
           ports:
             - containerPort: 3306
+
